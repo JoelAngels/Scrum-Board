@@ -39,9 +39,47 @@ function useColumnTasks(column: ColumnType) {
     });
   }, [column, setTasks]);
 
+  //   ====================================Delete Task =================================
+
+  const deleteTask = useCallback(
+    (id: TaskModel["id"]) => {
+      console.log(`Removing task ${id}..`);
+      setTasks((allTasks) => {
+        const columnTasks = allTasks[column];
+        return {
+          ...allTasks,
+          [column]: columnTasks.filter((task) => task.id !== id),
+        };
+      });
+    },
+    [column, setTasks]
+  );
+
+  //   ====================================Update Task =================================
+
+  const updateTask = useCallback(
+    (id: TaskModel["id"], updatedTask: Omit<Partial<TaskModel>, "id">) => {
+      console.log(`Updating task ${id} with ${JSON.stringify(updateTask)}`);
+      setTasks((allTasks) => {
+        const columnTasks = allTasks[column];
+        return {
+          ...allTasks,
+          [column]: columnTasks.map((task) =>
+            task.id === id ? { ...task, ...updatedTask } : task
+          ),
+        };
+      });
+    },
+    [column, setTasks]
+  );
+
+  //   ====================================Delete Task =================================
+
   return {
     tasks: tasks[column],
     addEmptyTask,
+    updateTask,
+    deleteTask,
   };
 }
 
