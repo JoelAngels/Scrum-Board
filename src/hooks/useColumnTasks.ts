@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ColumnType } from "../utils/enums";
-import { pickChakraRandomColor } from "../utils/helpers";
+import { pickChakraRandomColor, swap } from "../utils/helpers";
 import { TaskModel } from "../utils/models";
 import useTaskCollection from "./useTaskCollection";
 
@@ -99,12 +99,28 @@ function useColumnTasks(column: ColumnType) {
     [column, setTasks]
   );
 
+  //   =============================Swap Task Function======================================
+  const swapTasks = useCallback(
+    (i: number, j: number) => {
+      console.log(`Swapping task ${i} with ${j} in ${column} column`);
+      setTasks((allTasks) => {
+        const columnTasks = allTasks[column];
+        return {
+          ...allTasks,
+          [column]: swap(columnTasks, i, j),
+        };
+      });
+    },
+    [column, setTasks]
+  );
+
   return {
     tasks: tasks[column],
     addEmptyTask,
     updateTask,
     deleteTask,
     dropTaskFrom,
+    swapTasks,
   };
 }
 

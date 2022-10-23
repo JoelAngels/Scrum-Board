@@ -9,6 +9,7 @@ type Taskprops = {
   task: TaskModel;
   onUpdate: (id: TaskModel["id"], updatedTask: TaskModel) => void;
   onDelete: (id: TaskModel["id"]) => void;
+  onDropHover: (i: number, j: number) => void;
 };
 
 function Task({
@@ -16,10 +17,12 @@ function Task({
   task,
   onDelete: handleDelete,
   onUpdate: handleUpdate,
+  onDropHover: handleDropHover,
 }: Taskprops) {
   const { ref, isDragging } = useTaskDragAndDrop<HTMLDivElement>({
     task,
     index,
+    handleDropHover,
   });
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
