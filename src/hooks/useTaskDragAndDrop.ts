@@ -6,6 +6,7 @@ import { DragItem, TaskModel } from "../utils/models";
 export function useTaskDragAndDrop<T extends HTMLElement>({
   task,
   index,
+  handleDropHover,
 }: {
   task: TaskModel;
   index: number;
@@ -93,6 +94,6 @@ export function useTaskDragAndDrop<T extends HTMLElement>({
     isDragging,
   };
 }
-function handleDropHover(draggedItemIndex: number, hoveredItemIndex: number) {
-  throw new Error("Function not implemented.");
-}
+// function handleDropHover(draggedItemIndex: number, hoveredItemIndex: number) {
+//   throw new Error("Function not implemented.");
+// }
