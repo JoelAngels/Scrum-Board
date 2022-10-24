@@ -5,6 +5,7 @@ import "./App.css";
 import Column from "./components/Column";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import DarkModeIconButton from "./components/DarkModeIconButton";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       >
         Scrum board
       </Heading>
+      <DarkModeIconButton position="absolute" to={0} right={2} />
       <Container maxWidth="container.lg" px={4} py={10}>
         {/* Column goes here */}
         {/* One column on small screen and full column on all screens */}
